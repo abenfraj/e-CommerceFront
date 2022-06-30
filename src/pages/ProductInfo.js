@@ -67,17 +67,17 @@ const ProductInfo = () => {
                                         if (quantity < 1)
                                             alert("Please select a quantity");
                                         else {
-                                            fetch("http://localhost:8080/products/addProductToCart?id=" + productId
+                                            fetch("http://localhost:8080/products/addProductToCart?id=" + product.id
                                                 + "&quantity=" + quantity)
                                                 .then(res => {
-                                                        console.log(res.status)
-                                                        if (res.status === 404) {
-                                                            alert("No more of this product available");
-                                                        } else {
-                                                            alert("Product added to cart");
-                                                        }
+                                                    console.log(res.status);
+                                                    if (res.status === 404) {
+                                                        alert("No more of this product available");
+                                                    } else {
+                                                        alert("Product added to cart");
                                                     }
-                                                );
+                                                }
+                                            );
                                         }
                                     }
                                     }>
