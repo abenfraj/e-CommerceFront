@@ -16,7 +16,7 @@ const Home = () => {
     });
 
     return (
-        <Container maxWidth="m">
+        <Container sx={{backgroundColor:"#b5c6cf"}} maxWidth="m">
             <Grid container spacing={2} alignItems="center">
                 {products.map(product => (
                     <Grid key={product.id} item xs={2.4}>
