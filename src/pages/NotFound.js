@@ -1,7 +1,12 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {Container, Grid, Typography} from "@mui/material";
 
 const NotFound = () => {
+
+    useEffect(() => {
+        document.title = "404 - Not Found";
+    }, []);
+
     return (
         <Container>
             <Grid

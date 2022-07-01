@@ -24,12 +24,14 @@ const ProductInfo = () => {
     theme = responsiveFontSizes(theme);
 
     useEffect(() => {
+
         fetch("http://localhost:8080/product/by-id/" + productId)
             .then(res => res.json())
             .then(data => {
                     setProduct(data);
                 }
             );
+        document.title = "e-Commerce - " + product.name;
     }, [productId]);
 
     return (
@@ -65,22 +67,18 @@ const ProductInfo = () => {
                             <Button variant="contained" endIcon={<AddShoppingCartIcon/>}
                                     onClick={() => {
                                         if (quantity < 1)
-                                            alert("Please select a quantity");
-                                        else {
-                                            fetch("http://localhost:8080/products/addProductToCart?id=" + product.id
-                                                + "&quantity=" + quantity)
-                                                .then(res => {
-                                                    console.log(res.status);
-                                                    if (res.status === 404) {
-                                                        alert("No more of this product available");
-                                                    } else {
-                                                        alert("Product added to cart");
-                                                    }
-                                                }
-                                            );
-                                        }
-                                    }
-                                    }>
+                                            return alert("Please select a quantity");
+                                        fetch("http://localhost:8080/products/addProductToCart?id=" + product.id
+                                            + "&quantity=" + quantity)
+                                        .then(res => {
+                                            if (res.status === 404) {
+                                                alert("No more of this product available");
+                                            } else {
+                                                alert("Product added to cart");
+                                            }
+                                        });
+                                    }}
+                            >
                                 Add
                             </Button>
                         </Grid>

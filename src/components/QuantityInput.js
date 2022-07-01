@@ -1,8 +1,6 @@
-import {useState} from "react";
 import {Box, TextField} from "@mui/material";
 
 const QuantityInput = ({quantity, setQuantity, maxQuantity}) => {
-    let updatedQuantity = quantity;
 
     return (
         <div>
@@ -12,19 +10,27 @@ const QuantityInput = ({quantity, setQuantity, maxQuantity}) => {
                     label="Quantity"
                     type="number"
                     size="small"
-                    value={updatedQuantity}
+                    value={quantity}
                     onChange={(e) => {
-                        if (e.target.value > maxQuantity) {
-                            updatedQuantity = maxQuantity;
+                        if (isNaN(parseInt(e.target.value))) {
+                            e.target.value = "";
+                            setQuantity(0);
+                            return;
+                        }
+
+                        const value = parseInt(e.target.value);
+
+                        if (value > maxQuantity) {
+                            e.target.value = maxQuantity;
                             setQuantity(maxQuantity);
-                        } else if (e.target.value < 1) {
-                            updatedQuantity = undefined;
-                            setQuantity(undefined);
-                        } else {
-                            updatedQuantity = e.target.value;
-                            setQuantity(e.target.value);
+                            return;
                         }
+                        if (value < 1) {
+                            setQuantity(0);
+                            return;
                         }
+                        setQuantity(value);
+                    }
                     }
                     InputLabelProps={{shrink: true}}
                     inputProps={{

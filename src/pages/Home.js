@@ -6,7 +6,9 @@ import {Container} from "@mui/material";
 const Home = () => {
     const [products, setProducts] = useState([]);
 
+
     useEffect(() => {
+        document.title = "e-Commerce - Home";
         fetch("http://localhost:8080/products")
             .then(res => res.json())
             .then(data => {

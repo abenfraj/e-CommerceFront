@@ -7,7 +7,8 @@ import LocationOnIcon from '@mui/icons-material/LocationOn';
 import {useState} from "react";
 import {Button} from "@mui/material";
 
-const ShippingForm = ({cart}) => {
+
+const ShippingForm = () => {
     const [name, setName] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
     const [address, setAddress] = useState('');
@@ -33,12 +34,13 @@ const ShippingForm = ({cart}) => {
                 address: address
             })
         }).then(res => res.json())
-            .then(res => {
+            .then(() => {
                 setIsPending(false);
-
+                window.location.replace('/purchase-confirmation/success');
             })
             .catch(err => {
                 console.log(err);
+                window.location.replace('/purchase-confirmation/failure');
             })
     }
 
@@ -60,8 +62,9 @@ const ShippingForm = ({cart}) => {
                                onChange={(e) => setAddress(e.target.value)}/>
                 </Box>
             </Box>
-            {!isPending && <Button variant="contained" type="submit" sx={{marginTop: "20px", marginLeft: "80px"}}>Submit</Button>}
-            {isPending && <Button disabled variant="contained" type="submit">Submitting...</Button>}
+            {!isPending &&
+                <Button variant="contained" type="submit" sx={{marginTop: "20px", marginLeft: "80px"}}>Order</Button>}
+            {isPending && <Button disabled variant="contained" type="submit">Ordering...</Button>}
         </form>
     );
 }
